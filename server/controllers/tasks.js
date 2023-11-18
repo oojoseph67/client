@@ -1,3 +1,5 @@
+const Task = require("../modules/tasks");
+
 const getAllTasks = (req, res) => {
   res.send("all items from the file");
 };
@@ -8,9 +10,9 @@ const getTaskById = (req, res) => {
   res.json(taskId);
 };
 
-const createTask = (req, res) => {
-  // res.send('create task')
-  res.json(req.body);
+const createTask = async (req, res) => {
+  const task = await Task.create(req.body);
+  res.status(201).json({ task });
 };
 
 const updateTask = (req, res) => {
