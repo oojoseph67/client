@@ -6,9 +6,11 @@ const cors = require("cors");
 require("dotenv").config();
 
 // middleware
-app.use(cors({
-  origin: '*' // or '*' to allow all origins
-}));
+app.use(
+  cors({
+    origin: "*", // or '*' to allow all origins
+  })
+);
 app.use(express.json());
 
 // routes
@@ -24,7 +26,6 @@ app.use("/api/v1/tasks", tasks);
 // app.patch('/api/v1/tasks/:id')     - update a task
 // app.delete('/api/v1/tasks/:id')    - delete a task
 
-
 const port = 7000;
 
 // the const below makes sure we are connected to the db before starting the server
@@ -37,4 +38,4 @@ const start = async () => {
   }
 };
 
-start()
+start();
