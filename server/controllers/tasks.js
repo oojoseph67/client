@@ -1,14 +1,11 @@
 const Task = require("../modules/tasks");
+const asyncWrapper = require("../middleware/async");
 
-const getAllTasks = async (req, res) => {
-  try {
-    const tasks = await Task.find({});
-    res.status(200).json({ tasks });
-  } catch (error) {
-    res.status(500).json(error);
-  }
+const getAllTasks = asyncWrapper(async (req, res) => {
+  const tasks = await Task.find({});
+  res.status(200).json({ tasks });
   // res.send("all items from the file");
-};
+});
 
 const getTaskById = async (req, res) => {
   // res.send('task by id')
@@ -26,14 +23,10 @@ const getTaskById = async (req, res) => {
   }
 };
 
-const createTask = async (req, res) => {
-  try {
-    const task = await Task.create(req.body);
-    res.status(201).json({ task });
-  } catch (error) {
-    res.status(500).json(error);
-  }
-};
+const createTask = asyncWrapper(async (req, res) => {
+  const task = await Task.create(req.body);
+  res.status(201).json({ task });
+});
 
 const updateTask = async (req, res) => {
   try {

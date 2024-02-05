@@ -3,6 +3,9 @@ const app = express();
 const tasks = require("./routes/tasks");
 const connectDB = require("./db/index");
 const cors = require("cors");
+const notFound = require('./middleware/not-found')
+const asyncWrapper = require("./middleware/async");
+const errorHandlerMiddleware = require("./middleware/error-handler");
 require("dotenv").config();
 
 // middleware
@@ -19,6 +22,9 @@ app.get("/hello", (req, res) => {
 });
 
 app.use("/api/v1/tasks", tasks);
+
+app.use(notFound); // middleware
+app.use(errorHandlerMiddleware); // middleware
 
 // app.get('/api/v1/tasks')           - get all the tasks
 // app.post('/api/v1/tasks')          - create a new task
